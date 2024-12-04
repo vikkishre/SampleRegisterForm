@@ -3,29 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Registration Form</title>
     <link rel="stylesheet" href="styles.css">
-    <title>Registration Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#registrationForm").on("submit", function (event) {
+                event.preventDefault();
+
+                // Get form data
+                const name = $("#name").val();
+                const email = $("#email").val();
+                const phone = $("#phone").val();
+                const address = $("#address").val();
+
+                // Display the data
+                $("#formData").html(`
+                    <h1>Form Submission Successful</h1>
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Phone:</strong> ${phone}</p>
+                    <p><strong>Address:</strong><br>${address}</p>
+                    <a href="#" onclick="location.reload()" style="display: block; margin-top: 20px; text-align: center; text-decoration: none; color: white; background: #4CAF50; padding: 10px; border-radius: 4px;">Go Back</a>
+                `);
+
+                // Hide the form
+                $("#registrationForm").hide();
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="container">
-        <h2>Registration Form</h2>
-        <form id="registrationForm" action="submit.php" method="POST">
-            <label for="name">Name</label>
+        <div id="formData"></div>
+        <form id="registrationForm">
+            <h1>Registration Form</h1>
+            <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
-            <label for="email">Email</label>
+            <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
 
-            <label for="gender">Gender</label>
-            <select id="gender" name="gender" required>
-                <option value="" disabled selected>Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
 
-            <label for="age">Age</label>
-            <input type="number" id="age" name="age" required>
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" rows="4" required></textarea>
 
             <button type="submit">Submit</button>
         </form>
